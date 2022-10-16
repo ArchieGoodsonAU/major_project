@@ -71,13 +71,15 @@ class blockClass{
             //std::cout << "Sprite created \n";
         }
         void update(){
+            
             xpos = -1 * Player->xpos + initxpos;
             collide(0);
             mySprite.setPosition(Vector2f(xpos, ypos));
-            
+
             ypos = -1 * Player->ypos + initypos;
             collide(1);
             mySprite.setPosition(Vector2f(xpos, ypos));
+
 
             
         }
@@ -92,12 +94,12 @@ class blockClass{
             int my_top_wall = ypos;
             int my_bottom_wall = ypos + 64;
             //Check for vertical any overlap
-            if(abs(xpos - 500) > 63 || abs(ypos - 400) > 64){
+            if(abs(xpos - 500) > 63 || abs(ypos - 400) > 63){
                 return;
             }
             if(axis == 1){
                 if(Player->yvel >= 0){
-                    Player->ypos = -464 + initypos;
+                    Player->ypos = -463 + initypos;
                     ypos = ypos + Player->yvel;
                     Player->yvel = 0;
                     Player->floorcheck = true;
