@@ -11,6 +11,7 @@ class player{
         float xvel, yvel;
         int speed, jumpHeight;
         int xpos, ypos;
+        bool floorcheck;
         Texture tradieTexture;
         Sprite* tradieSprite;
         player(){
@@ -26,7 +27,9 @@ class player{
         }
         void update(){
 
+            onGround = floorcheck;
             collide();
+            
             right = (Keyboard::isKeyPressed(Keyboard::Right));
             left = (Keyboard::isKeyPressed(Keyboard::Left));
             
@@ -36,11 +39,12 @@ class player{
                 onGround = false;
             }
             //std::cout << ypos << std::endl;
-            yvel += 0.1;
+            yvel += 0.2;
             yvel = yvel * (1-onGround); //set yvel to 0 if on ground
             xpos += xvel;
             ypos += yvel;
             jump = false;
+            floorcheck = false;
             //tradieSprite->setPosition(Vector2f(xpos, std::min(ypos, 500)));
         }
 
@@ -48,7 +52,6 @@ class player{
             if(ypos >= 500){
                 onGround = true;
                 ypos = 500;
-                std::cout << "On ground";
             }
         }
 };
@@ -68,11 +71,15 @@ class blockClass{
             //std::cout << "Sprite created \n";
         }
         void update(){
+            xpos = -1 * Player->xpos + initxpos;
+            collide(0);
+            mySprite.setPosition(Vector2f(xpos, ypos));
+            
             ypos = -1 * Player->ypos + initypos;
             collide(1);
             mySprite.setPosition(Vector2f(xpos, ypos));
-            xpos = -1 * Player->xpos + initxpos;
-            mySprite.setPosition(Vector2f(xpos, ypos));
+
+            
         }
         void collide(int axis){
             //centre of screen is tradie
@@ -85,7 +92,7 @@ class blockClass{
             int my_top_wall = ypos;
             int my_bottom_wall = ypos + 64;
             //Check for vertical any overlap
-            if(abs(xpos - 500) > 64 || abs(ypos - 400) > 64){
+            if(abs(xpos - 500) > 63 || abs(ypos - 400) > 64){
                 return;
             }
             if(axis == 1){
@@ -93,11 +100,23 @@ class blockClass{
                     Player->ypos = -464 + initypos;
                     ypos = ypos + Player->yvel;
                     Player->yvel = 0;
-                    Player->onGround = true;
+                    Player->floorcheck = true;
                 }else{
                     Player->ypos = -336 + initypos;
                     ypos = ypos + Player->yvel;
                     Player->yvel = 1;
+                }
+            }
+            if(axis == 0 && abs(ypos - 400) < 63){
+                if(Player->right){
+                    Player->xpos = -564 + initxpos;
+                    xpos = xpos + Player->xvel;
+                    Player->xvel = 0;
+                }
+                if(Player->left){
+                    Player->xpos = -436 + initxpos;
+                    xpos = xpos + Player->xvel;
+                    Player->xvel = 0;
                 }
             }
 
@@ -108,19 +127,19 @@ class blockClass{
 class GameManager{
     public:
 
-    int blockCoords[2][2] = {{750, 750},{400, 400}};
+    int blockCoords[5][2] = {{800, 700},{863, 700},{926, 700},{1000, 600},{1064, 600}};
     GameManager(){
     RenderWindow window(VideoMode(1000, 800), "SFML works!");
 
     player player;
 
     
-    int blockCount = 2;
+    int blockCount = 10;
     blockClass* grassblocks = new blockClass[blockCount];
     //std::cout << "we made it this far \n";
     for(int i = 0; i < blockCount; i++){
         grassblocks[i].initxpos = blockCoords[i][0];
-        grassblocks[i].initypos = blockCoords[i][0];
+        grassblocks[i].initypos = blockCoords[i][1];
         grassblocks[i].Player = &player;
     }
     //std::cout << "Yeezus \n";
