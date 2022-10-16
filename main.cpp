@@ -14,18 +14,19 @@ class player{
         Texture tradieTexture;
         Sprite* tradieSprite;
         player(){
-            tradieTexture.loadFromFile("data/images/tradie.png");
+            tradieTexture.loadFromFile("data/images/grass.png");
             tradieSprite = new Sprite(tradieTexture);
             xvel, yvel = 400, 500;
             xpos = 500;
             ypos = 400;
             speed = 2;
-            jumpHeight = 6;
+            jumpHeight = 10;
             onGround = false;
             tradieSprite->setPosition(Vector2f(xpos, ypos));
         }
         void update(){
 
+            collide();
             right = (Keyboard::isKeyPressed(Keyboard::Right));
             left = (Keyboard::isKeyPressed(Keyboard::Left));
             
@@ -40,14 +41,14 @@ class player{
             xpos += xvel;
             ypos += yvel;
             jump = false;
-            collide();
             //tradieSprite->setPosition(Vector2f(xpos, std::min(ypos, 500)));
         }
 
         void collide(){
-            if(ypos > 500){
+            if(ypos >= 500){
                 onGround = true;
                 ypos = 500;
+                std::cout << "On ground";
             }
         }
 };
@@ -88,10 +89,15 @@ class blockClass{
                 return;
             }
             if(axis == 1){
-                if(Player->yvel > 0){
+                if(Player->yvel >= 0){
                     Player->ypos = -464 + initypos;
                     ypos = ypos + Player->yvel;
+                    Player->yvel = 0;
                     Player->onGround = true;
+                }else{
+                    Player->ypos = -336 + initypos;
+                    ypos = ypos + Player->yvel;
+                    Player->yvel = 1;
                 }
             }
 
