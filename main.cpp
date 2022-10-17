@@ -26,13 +26,10 @@ class player{
             tradieSprite->setPosition(Vector2f(xpos, ypos));
         }
         void update(){
-
             onGround = floorcheck;
             collide();
-            
             right = (Keyboard::isKeyPressed(Keyboard::Right));
             left = (Keyboard::isKeyPressed(Keyboard::Left));
-            
             xvel = right * speed - left * speed;
             yvel += -jumpHeight * jump * onGround;
             if(jump){
@@ -47,7 +44,6 @@ class player{
             floorcheck = false;
             //tradieSprite->setPosition(Vector2f(xpos, std::min(ypos, 500)));
         }
-
         void collide(){
             if(ypos >= 500){
                 onGround = true;
@@ -98,12 +94,12 @@ class blockClass{
                 return;
             }
             if(axis == 1){
-                if(Player->yvel >= 0){
+                if(Player->yvel >= 0) {
                     Player->ypos = -463 + initypos;
                     ypos = ypos + Player->yvel;
                     Player->yvel = 0;
                     Player->floorcheck = true;
-                }else{
+                } else {
                     Player->ypos = -336 + initypos;
                     ypos = ypos + Player->yvel;
                     Player->yvel = 1;
@@ -145,8 +141,6 @@ class GameManager{
         grassblocks[i].Player = &player;
     }
     //std::cout << "Yeezus \n";
-
-
 
     sf::Clock deltaClock;
     while (window.isOpen()) //loop to update the window

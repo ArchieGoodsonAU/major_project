@@ -27,10 +27,8 @@ class player {
   void update() {
     onGround = floorcheck;
     collide();
-
     right = (Keyboard::isKeyPressed(Keyboard::Right));
     left = (Keyboard::isKeyPressed(Keyboard::Left));
-
     xvel = right * speed - left * speed;
     yvel += -jumpHeight * jump * onGround;
     if (jump) {
@@ -45,7 +43,6 @@ class player {
     floorcheck = false;
     // tradieSprite->setPosition(Vector2f(xpos, std::min(ypos, 500)));
   }
-
   void collide() {
     if (ypos >= 500) {
       onGround = true;
@@ -53,6 +50,7 @@ class player {
     }
   }
 };
+
 class entity {
  public:
   float xpos, ypos, initxpos, initypos;
@@ -95,7 +93,7 @@ class blockClass : public entity {
   }
   void update() {
     update_location_x();
-    if (check_player_collision) {
+    if (check_player_collision()) {
       collide_x();
       mySprite.setPosition(Vector2f(xpos, ypos));
       ypos = -1 * Player->ypos + initypos;
@@ -152,7 +150,7 @@ class glass_block : public blockClass {
   }
   void update() {
     update_location_x();
-    if (check_player_collision) {
+    if (check_player_collision()) {
       collide_x();
       mySprite.setPosition(Vector2f(xpos, ypos));
       ypos = -1 * Player->ypos + initypos;
@@ -179,8 +177,14 @@ class glass_block : public blockClass {
 
 class GameManager {
  public:
-  int blockCoords[5][2] = {
-      {800, 700}, {863, 700}, {926, 700}, {1000, 600}, {1064, 600}};
+  int blockCoords[5][2] = 
+  {
+      {800, 700},
+      {863, 700},
+      {926, 700},
+      {1000, 600},
+      {1064, 600}
+  };
   GameManager() {
     RenderWindow window(VideoMode(1000, 800), "SFML works!");
     player player;
@@ -192,8 +196,8 @@ class GameManager {
       grassblocks[i].initypos = blockCoords[i][1];
       grassblocks[i].Player = &player;
     }
-    blockClass* Glass = new glass_block;
-    //Glass->init();
+    glass_block* Glass = new glass_block;
+    Glass->init();
     Glass->initxpos = 700;
     Glass->initypos = 700;
     Glass->Player = &player;
@@ -216,7 +220,6 @@ class GameManager {
 
       for (int i = 0; i < blockCount; i++) {
         grassblocks[i].update();
-
         // std::cout << grassblocks[i].ypos << ", "<< grassblocks[i].xpos <<
         // std::endl;
         window.draw(grassblocks[i].mySprite);
