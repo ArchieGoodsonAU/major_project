@@ -98,7 +98,6 @@ class blockClass : public entity {
     if (check_player_collision) {
       collide_x();
       mySprite.setPosition(Vector2f(xpos, ypos));
-
       ypos = -1 * Player->ypos + initypos;
       collide_y();
       mySprite.setPosition(Vector2f(xpos, ypos));
@@ -156,7 +155,6 @@ class glass_block : public blockClass {
     if (check_player_collision) {
       collide_x();
       mySprite.setPosition(Vector2f(xpos, ypos));
-
       ypos = -1 * Player->ypos + initypos;
       collide_y();
       mySprite.setPosition(Vector2f(xpos, ypos));
