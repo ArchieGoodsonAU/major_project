@@ -1,3 +1,4 @@
 game: player.h blockClass.h GameManager.h main2.cpp
-	@g++ player.h blockClass.h GameManager.h main2.cpp 
-	@./1-2
+	@g++ -c player.h blockClass.h GameManager.h main2.cpp
+	@g++ main2.o -o game -lsfml-graphics -lsfml-window -lsfml-system
+	@./game
