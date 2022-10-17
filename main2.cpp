@@ -60,17 +60,14 @@ class entity {
   player* Player;
   int x_size, y_size;
   void update_location_x() {
-    xpos = -1 * Player->xpos +
-           initxpos;  // Go to starting x position - any player/camera movement
+    xpos = -1 * Player->xpos + initxpos;  // Go to starting x position - any player/camera movement
   }
   void update_location_y() {
-    ypos = -1 * Player->ypos +
-           initypos;  // Go to starting x position - any player/camera movement
+    ypos = -1 * Player->ypos + initypos;  // Go to starting x position - any player/camera movement
   }
   bool check_player_collision() {
     // Player located at pixel coords (500, 400) and of size 64x64
-    if (abs(xpos - 500) > x_size / 2 + 32 ||
-        abs(ypos - 400) > y_size / 2 + 32) {
+    if (abs(xpos - 500) > x_size / 2 + 32 || abs(ypos - 400) > y_size / 2 + 32) {
       return false;
     }
     return true;
