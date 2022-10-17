@@ -86,10 +86,9 @@ class blockClass : public entity {
   blockClass() {
     image.loadFromFile("data/images/grass.png");
     mySprite = *(new Sprite(image));
-    // std::cout << "Sprite created \n";
   }
   void update() {
-    update_location_x();
+    // update_location_x();
     if (check_player_collision()) {
       collide_x();
       mySprite.setPosition(Vector2f(xpos, ypos));
@@ -145,25 +144,25 @@ class glass_block : public blockClass {
       Player->yvel = 1;
     }
   }
-  void update() {
-    update_location_x();
-    if (check_player_collision()) {
-      collide_x();
-      mySprite.setPosition(Vector2f(xpos, ypos));
-      ypos = -1 * Player->ypos + initypos;
-      collide_y();
-      mySprite.setPosition(Vector2f(xpos, ypos));
-    } else {
-      mySprite.setPosition(Vector2f(xpos, ypos));
-    }
-    if (timer != 2) {
-      timer -= 0.05f;
-    }
-    if (timer <= 0) {
-      delete this;
-    }
-    std::cout << xpos << std::endl;
-  }
+//   void update() {
+//     update_location_x();
+//     if (check_player_collision()) {
+//       collide_x();
+//       mySprite.setPosition(Vector2f(xpos, ypos));
+//       ypos = -1 * Player->ypos + initypos;
+//       collide_y();
+//       mySprite.setPosition(Vector2f(xpos, ypos));
+//     } else {
+//       mySprite.setPosition(Vector2f(xpos, ypos));
+//     }
+//     if (timer != 2) {
+//       timer -= 0.05f;
+//     }
+//     if (timer <= 0) {
+//       delete this;
+//     }
+//     std::cout << xpos << std::endl;
+//   }
   void init() {
     timer = 2;
     image.loadFromFile("data/images/grass.png");
@@ -214,11 +213,9 @@ class GameManager {
       }
       player.update();
       window.clear();  // Clear the screen of all elements
-
       for (int i = 0; i < blockCount; i++) {
         grassblocks[i].update();
-        // std::cout << grassblocks[i].ypos << ", "<< grassblocks[i].xpos <<
-        // std::endl;
+        // std::cout << grassblocks[i].ypos << ", "<< grassblocks[i].xpos << std::endl;
         window.draw(grassblocks[i].mySprite);
       }
       Glass->update();

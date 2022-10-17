@@ -124,14 +124,10 @@ class blockClass{
 
 class GameManager{
     public:
-
     int blockCoords[5][2] = {{800, 700},{863, 700},{926, 700},{1000, 600},{1064, 600}};
     GameManager(){
     RenderWindow window(VideoMode(1000, 800), "SFML works!");
-
     player player;
-
-    
     int blockCount = 10;
     blockClass* grassblocks = new blockClass[blockCount];
     //std::cout << "we made it this far \n";
