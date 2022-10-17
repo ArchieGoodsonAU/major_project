@@ -192,8 +192,8 @@ class GameManager {
       grassblocks[i].initypos = blockCoords[i][1];
       grassblocks[i].Player = &player;
     }
-    glass_block* Glass = new glass_block;
-    Glass->init();
+    blockClass* Glass = new glass_block;
+    //Glass->init();
     Glass->initxpos = 700;
     Glass->initypos = 700;
     Glass->Player = &player;
