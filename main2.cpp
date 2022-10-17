@@ -76,6 +76,7 @@ class entity{
             }
             return true;
         }
+        virtual void update() = 0;
 };
 
 class blockClass : public entity{
@@ -138,6 +139,57 @@ class blockClass : public entity{
         }
 };
 
+class glass_block : public blockClass{
+    public:
+    float timer;
+    void collide_y(){
+        if(Player->yvel >= 0){ //if Player is falling onto block
+                    Player->ypos = -463 + initypos;
+                    ypos = ypos + Player->yvel;
+                    Player->yvel = 0;
+                    Player->floorcheck = true;
+                    timer = 1;
+
+                }else{
+                    Player->ypos = -336 + initypos;
+                    ypos = -368 + initypos;
+                    Player->yvel = 1;
+                }
+    }
+    void update(){
+            
+            update_location_x();
+            if(check_player_collision){
+            collide_x();
+            mySprite.setPosition(Vector2f(xpos, ypos));
+
+            ypos = -1 * Player->ypos + initypos;
+            collide_y();
+            mySprite.setPosition(Vector2f(xpos, ypos));
+            }
+            else{
+                mySprite.setPosition(Vector2f(xpos, ypos));
+            }
+            if(timer != 2){
+                timer -= 0.05f;
+            }
+            if(timer <= 0){
+                delete this;
+            }
+            std::cout << xpos << std::endl;
+
+            
+        }
+
+        init(){
+            timer = 2;
+            image.loadFromFile("data/images/grass.png");
+            mySprite = *(new Sprite(image));
+            std::cout << "Sprite created \n";
+        }
+
+};
+
 
 class GameManager{
     public:
@@ -157,6 +209,11 @@ class GameManager{
         grassblocks[i].initypos = blockCoords[i][1];
         grassblocks[i].Player = &player;
     }
+    glass_block* Glass = new glass_block;
+    Glass->init();
+    Glass->initxpos = 700;
+    Glass->initypos = 700;
+    Glass->Player = &player;
     //std::cout << "Yeezus \n";
 
 
@@ -183,6 +240,8 @@ class GameManager{
                 //std::cout << grassblocks[i].ypos << ", "<< grassblocks[i].xpos << std::endl;
                 window.draw(grassblocks[i].mySprite);
             }
+            Glass->update();
+            window.draw(Glass->mySprite);
             window.draw(*player.tradieSprite); //Draw the rectangle
 
             window.display(); //Display it
