@@ -3,45 +3,43 @@
 #include "fullTimeEmployee.h"
 
 fullTimeEmployee::fullTimeEmployee(std::string name, int ID, int mySalary){
-    //countAvailability(availability);
-    //unavailability = setAvailability(unavailability_count, availability);
-    salary = mySalary;
-    this->firstName = name;
-    this->max_hours = 38;
-    this->id = ID;
+    //Initiator with all information
+    salary = mySalary; //Yearly earnings
+    this->firstName = name; //For that personal touch :)
+    this->max_hours = 38; //Full time maximum hours
+    this->id = ID; //Numerical ID
 }
 
 fullTimeEmployee::fullTimeEmployee(std::string name, int ID){
-    //countAvailability(availability);
-    //unavailability = setAvailability(unavailability_count, availability);
-    salary = 42255;
-    this->firstName = name;
-    this->max_hours = 38;
-    this->id = ID;
+    //Initiator with critical information
+    salary = 42255; //Full time minimum wage (default salary)
+    this->firstName = name; //For that personal touch
+    this->max_hours = 38; //Max full time hours
+    this->id = ID; //Numerical ID
 }
 
 fullTimeEmployee::fullTimeEmployee(){
-    this->firstName = "N/A";
-    this->max_hours = -1;
-    this->id = 0;
-    //this->mySchedule = schedule();
+    //Empty initiator
+    this->firstName = "N/A"; //No name
+    this->max_hours = -1; //To be distinguishable from employees with no availability
+    this->id = 0; // Empty numerical ID
+
 }
 void fullTimeEmployee::setData(std::string name, int ID, int mySalary){
+    //Update all data
+    this->firstName = name; //For that personal touch
+    this->max_hours = 38; //Max fulltime hours (default)
+    this->id = ID; //Numerical ID
 
-    //std::cout << "attempt made";
-    this->firstName = name;
-    this->max_hours = 38;
-    this->id = ID;
-    //this->mySchedule = schedule();
 }
 void fullTimeEmployee::setData(std::string name, int ID){
-    //std::cout << "attempt made";
-    this->firstName = name;
-    this->max_hours = 38;
-    this->id = ID;
-    //this->mySchedule = schedule();
+    //Update personal data
+    this->firstName = name; //For that personal touch
+    this->max_hours = 38; //Full time max hours (default)
+    this->id = ID; //Numerical ID
+
 }
 
 void fullTimeEmployee::call_off(int day, int shift){
-    std::cout << "Yeezus";
+    //To ensure valid inheritance
 }
