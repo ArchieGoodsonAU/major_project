@@ -1,3 +1,8 @@
+employee_test: employee.cpp fullTimeEmployee.cpp employee_tester.cpp
+	@g++ -Wall employee.cpp fullTimeEmployee.cpp employee_tester.cpp -o tester.out
+run_test: tester.out employee_testing.txt
+	@./tester.out < employee_testing.txt
+
 1-1: function-1-1.cpp main-1-1.cpp
 	@g++ function-1-1.cpp main-1-1.cpp -o main-1-1.out
 	@./main-1-1.out

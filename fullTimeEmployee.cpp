@@ -32,6 +32,7 @@ void fullTimeEmployee::setData(std::string name, int ID, int mySalary){
     this->firstName = name;
     this->maxHours = 38;
     this->id = ID;
+    this->salary = mySalary;
     //this->mySchedule = schedule();
 }
 void fullTimeEmployee::setData(std::string name, int ID){
