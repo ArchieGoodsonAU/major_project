@@ -1,5 +1,6 @@
 #include <iostream>
 #include "employee.h"
+#include "schedule.h"
 #include "fullTimeEmployee.h"
 #include "partTimeEmployee.h"
 #include <time.h>
@@ -38,7 +39,7 @@ int main(void) {
     time(&end);
     double time_taken = double(end - start);
     std::cout << "Time taken for full timers is : " << std::fixed << std::setprecision(3) << time_taken << std::endl;
-/*
+    
     std::cout << "Start testing for part time employees" << std::endl;
     int num_of_part;
     std::cin >> num_of_part;
@@ -67,6 +68,5 @@ int main(void) {
         }
     }
     std::cout << "Finished testing in part time employees" << std::endl;
-*/
     return 0;
 }
