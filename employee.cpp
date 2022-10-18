@@ -4,8 +4,10 @@
 employee::employee(){
     //No initialiser as different types of employees initialise differently
 }
-//Check if MySchedule matches MyAvailability and total hours does not exceed max_hours
+
 void employee::checkSchedule(){
+    
+    //Check if MySchedule matches MyAvailability and total hours does not exceed max_hours
     int hourCount = 0; //Total hours worked
     std::cout << "Hi " << firstName << " checking " << this->firstName  << "'s schedule!"; //UI
     for(int day = 0; day < 5; day++){ //Loop through every day
