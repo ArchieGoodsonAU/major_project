@@ -27,11 +27,11 @@ fullTimeEmployee::fullTimeEmployee(){
     //this->mySchedule = schedule();
 }
 void fullTimeEmployee::setData(std::string name, int ID, int mySalary){
-
     //std::cout << "attempt made";
     this->firstName = name;
     this->max_hours = 38;
     this->id = ID;
+    salary = mySalary;
     //this->mySchedule = schedule();
 }
 void fullTimeEmployee::setData(std::string name, int ID){
