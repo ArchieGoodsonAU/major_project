@@ -18,7 +18,7 @@ void employee::checkSchedule(){
                 if(availability.mySchedule[day][shift] == 1){ //If you have called off this shift
                     //If both conditions are true, you have been scheduled for a shift you have called off
                     //UI
-                    std::cout << this->firstName <<" has been scheduled for a shift on day " << day + 1 << "shift " << shift + 1 << " which they have previously booked off \n";
+                    std::cout << this->firstName <<" has been scheduled for a shift on day " << day + 1 << " shift " << shift + 1 << " which they have previously booked off \n";
                     std::cout << "Please contact employee or change schedule \n \n";
                 }
             }

@@ -12,9 +12,9 @@ class manager : public fullTimeEmployee {
   int ID; //Numerical ID
   //manager(std::string name); //Initialiser with name
   manager(); //Initialiser without name
-  void setNamePassword(std::string name, std::string password);
-  std::string getName();
-  std::string getPassword();
+  void setNamePassword(std::string name, std::string password); //sets a new name and password to the txt
+  std::string getName(); //returns name from txt 
+  std::string getPassword(); //returns name from txt
   std::string get_password(); //Returns password
 
  private:
