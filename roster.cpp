@@ -12,7 +12,7 @@
 
 roster::roster(void){
     //On roster initialisation, user input is gathered to instantiate and aggregate employee objects
-    Manager = manager("Marco"); //Create manager
+    Manager = manager(); //Create manager
     int inputted_ID; //ID entered by user
     std::string inputted_password; //Password entered by user
     int remaining_attempts = 4; //Remaining attempts to enter correct password
@@ -54,6 +54,21 @@ roster::roster(void){
     }
     if(user_response == 'Y'){ //If they indicate yes
         roster_employees(); //Roster employees
+    }
+    std::cout<<"Would you like like to change your name or password? Y/N: ";
+    std::cin>>user_response;
+    while(user_response != 'Y' && user_response != 'N'){ //if invalid response (this should be a seperate function but it created errors with cin)
+        std::cout << "Please enter Y (yes) or N (no): "; //Ask for valid input
+        std::cin >> user_response; //Read next attempt
+    }
+    if(user_response == 'Y'){ //If they indicate yes
+    std::string newName;
+    std::string newPassword;
+    std::cout<<"What is your new name? ";
+    std::cin>>newName;
+    std::cout<<"What is your new password? ";
+    std::cin>>newPassword;
+    Manager.setNamePassword(newName, newPassword); //change name and passowrd
     }
     std::cout << "Thank you for using our not patented and not very good rostering system! Have a nice day :) \n"; //Goodbye message
 }
