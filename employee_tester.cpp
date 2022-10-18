@@ -57,7 +57,7 @@ int main(void) {
         if (parttimers[i].firstName != name) {
             std::cout << "Test " << i + 1 << " Failed at setting name" << std::endl;
         }
-        if (parttimers[i].maxHours != max_hours) {
+        if (parttimers[i].max_hours != max_hours) {
             std::cout << "Test " << i + 1 << " Failed at setting max hours" << std::endl;
         }
         if (parttimers[i].id != ID) {

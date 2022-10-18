@@ -1,5 +1,5 @@
-employee_test: schedule.cpp employee.cpp fullTimeEmployee.cpp employee_tester.cpp
-	@g++ -Wall employee.cpp fullTimeEmployee.cpp employee_tester.cpp -o tester.out
+employee_test: schedule.h  employee.h partTimeEmployee.h fullTimeEmployee.h manager.h roster.h schedule.cpp employee.cpp partTimeEmployee.cpp fullTimeEmployee.cpp manager.cpp roster.cpp employee_tester.cpp
+	@g++ -Wall schedule.h  employee.h partTimeEmployee.h fullTimeEmployee.h manager.h roster.h schedule.cpp employee.cpp partTimeEmployee.cpp fullTimeEmployee.cpp manager.cpp roster.cpp employee_tester.cpp -o tester.out
 run_test: tester.out employee_testing.txt
 	@./tester.out < employee_testing.txt
 compile_main: schedule.h  employee.h partTimeEmployee.h fullTimeEmployee.h manager.h roster.h schedule.cpp employee.cpp partTimeEmployee.cpp fullTimeEmployee.cpp manager.cpp roster.cpp  main.cpp
