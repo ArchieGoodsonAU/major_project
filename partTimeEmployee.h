@@ -1,4 +1,5 @@
 #include "employee.h"
+#include "schedule.h"
 #include <iostream>
 #ifndef PARTTIMEEMPLOYEE_H
 #define PARTTIMEEMPLOYEE_H
@@ -7,8 +8,9 @@ class partTimeEmployee : public employee{
         int maxHours;
         void schedule_unavailabity();
         int hourly_wage;
+        partTimeEmployee();
         partTimeEmployee(std::string name, int max_hours, int ID);
-
+        void setData(std::string name, int max_hours, int ID);
         void call_off();
     /*
     void countAvailability(int availability[]);
