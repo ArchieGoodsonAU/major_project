@@ -9,4 +9,5 @@ schedule::schedule(){
 }
 void schedule::update_schedule(int day, int shift, int updatedAvail){
     mySchedule[day][shift] = updatedAvail;
+    std::cout << shift << std::endl;
 }

@@ -6,10 +6,11 @@ class employee{
     public:
     schedule mySchedule;
     int id;
+    int maxHours;
     std::string firstName;
     int* unavailability;
     int unavailability_count;
-    virtual void call_off() = 0;
+    virtual void call_off(int day, int shift) = 0;
     //virtual void setData(std::string new_name, int max_hours, int ID) = 0;
     employee();
 };
