@@ -1,4 +1,3 @@
-#include headers and libraries 
 #include "manager.h"
 #include "employee.h"
 #include "roster.h"
@@ -20,7 +19,7 @@ manager::manager(){
     salary = 70000; //Manager's salary
     this->firstName = "Marco"; //My bosses name as a default name
     this->max_hours = 45; //Available for all 15 shifts
-    this->id = 1; //Manger's ID
+    this->id = 1; //Manager's ID
     this->password = "ArchieRocks"; //Used to gain access to program
 }
 std::string manager::get_password(){
