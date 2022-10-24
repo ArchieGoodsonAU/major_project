@@ -12,7 +12,7 @@
 
 roster::roster(void){
     //On roster initialisation, user input is gathered to instantiate and aggregate employee objects
-    Manager = manager("Marco"); //Create manager
+    Manager = manager(); //Create manager
     int inputted_ID; //ID entered by user
     std::string inputted_password; //Password entered by user
     int remaining_attempts = 4; //Remaining attempts to enter correct password
@@ -54,6 +54,21 @@ roster::roster(void){
     }
     if(user_response == 'Y'){ //If they indicate yes
         roster_employees(); //Roster employees
+    }
+    std::cout<<"Would you like like to change your name or password? (Y/N): ";
+    std::cin>>user_response;
+    while(user_response != 'Y' && user_response != 'N'){ //if invalid response (this should be a seperate function but it created errors with cin)
+        std::cout << "Please enter Y (yes) or N (no): "; //Ask for valid input
+        std::cin >> user_response; //Read next attempt
+    }
+    if(user_response == 'Y'){ //If they indicate yes
+    std::string newName;
+    std::string newPassword;
+    std::cout<<"What is your new name? ";
+    std::cin>>newName;
+    std::cout<<"What is your new password? ";
+    std::cin>>newPassword;
+    Manager.setNamePassword(newName, newPassword); //change name and passowrd
     }
     std::cout << "Thank you for using our not patented and not very good rostering system! Have a nice day :) \n"; //Goodbye message
 }
@@ -136,6 +151,7 @@ void roster::roster_employees(){
 
 }
 void roster::input_employees(){ 
+    char user_response_2;
     //this allows for the manager to input employee details via a text interface
     std::cout << "How many part time employees are there?: "; //used for size of dynamic array
     std::cin >> employeeCount; //read in employeeCount from console
@@ -194,7 +210,7 @@ void roster::input_employees(){
                 std::cout << "Please enter an unused ID: "; //request a unique ID
                 std::cin >> tempID; //read in next attempt
         }
-        IDs[i] = tempID; //assign ID only once valid
+        ft_IDs[i] = tempID; //assign ID only once valid
     }
     
     part_time_employees = new partTimeEmployee[employeeCount]; //aggregate part time employees
@@ -205,7 +221,88 @@ void roster::input_employees(){
     full_time_employees = new fullTimeEmployee[ft_employeeCount]; //dynamically allocate array of full time employees
 
     for(int i = 0; i < ft_employeeCount; i++){ //for each full time employee
-        full_time_employees[i].setData(ft_names[i], IDs[i]); //assign identifying data
+        full_time_employees[i].setData(ft_names[i], ft_IDs[i]); //assign identifying data
+    }
+    std::cout<<"Would you like to set up employee availabiliy (Y/N): ";
+    char user_response;
+    std::cin>>user_response;
+    while(user_response != 'Y' && user_response != 'N'){ //if invalid response (this should be a seperate function but it created errors with cin)
+        std::cout << "Please enter Y (yes) or N (no): "; //Ask for valid input
+        std::cin >> user_response; //Read next attempt
+    }
+    if(user_response == 'Y'){ //If they indicate yes
+        for(int i = 0; i < employeeCount; i++){
+            std::cout<<"Are there any days that " << part_time_employees[i].firstName << " cannot work? (Y/N): ";
+            std::cin >> user_response; //Read input
+            while(user_response != 'Y' && user_response != 'N'){ //if invalid response (this should be a seperate function but it created errors with cin)
+            std::cout << "Please enter Y (yes) or N (no): "; //Ask for valid input
+            std::cin >> user_response; //Read next attempt
+            }
+            if(user_response == 'Y'){
+                for(int day = 0; day < 5; day++){
+                    std::cout << "Can " << part_time_employees[i].firstName << " work on day " << day + 1 << "?(Y/N): ";
+                    std::cin >> user_response_2;
+                    while(user_response_2 != 'Y' && user_response_2 != 'N'){ //if invalid response (this should be a seperate function but it created errors with cin)
+                        std::cout << "Please enter Y (yes) or N (no): "; //Ask for valid input
+                        std::cin >> user_response_2; //Read next attempt
+                    }
+                    if(user_response_2 == 'Y'){
+                        for(int j = 0; j < 3; j++){
+                            part_time_employees[i].mySchedule.mySchedule[i][j] == 0;
+                        }
+                    }else{
+                        for(int j = 0; j < 3; j++){
+                            part_time_employees[i].mySchedule.mySchedule[i][j] == 1;
+                        }
+                    }
+                }
+            }
+
+        }
+    
+        for(int i = 0; i < ft_employeeCount; i++){
+            std::cout<<"Are there any days that " << full_time_employees[i].firstName << " cannot work? (Y/N): ";
+            std::cin >> user_response; //Read input
+            while(user_response != 'Y' && user_response != 'N'){ //if invalid response (this should be a seperate function but it created errors with cin)
+            std::cout << "Please enter Y (yes) or N (no): "; //Ask for valid input
+            std::cin >> user_response; //Read next attempt
+            }
+            if(user_response == 'Y'){
+                for(int day = 0; day < 5; day++){
+                    std::cout << "Can " << full_time_employees[i].firstName << " work on day " << day + 1 << "?(Y/N): ";
+                    std::cin >> user_response_2;
+                    while(user_response_2 != 'Y' && user_response_2 != 'N'){ //if invalid response (this should be a seperate function but it created errors with cin)
+                        std::cout << "Please enter Y (yes) or N (no): "; //Ask for valid input
+                        std::cin >> user_response_2; //Read next attempt
+                    }
+                    if(user_response_2 == 'Y'){
+                        for(int j = 0; j < 3; j++){
+                            full_time_employees[i].mySchedule.mySchedule[i][j] == 0;
+                        }
+                    }else{
+                        for(int shift = 0; shift < 3; shift++){
+                            full_time_employees[i].mySchedule.mySchedule[day][shift] == 1;
+                        }
+                    }
+                }
+            }
+
+        }
+    }else{
+        for(int i = 0; i < employeeCount; i++){
+            for(int day = 0; day < 5; day++){
+                for(int shift = 0; shift < 3; shift++){
+                    part_time_employees[i].mySchedule.mySchedule[day][shift] == 0;
+                }
+            }
+        }
+        for(int i = 0; i < ft_employeeCount; i++){
+            for(int day = 0; day < 5; day++){
+                for(int shift = 0; shift < 3; shift++){
+                    full_time_employees[i].mySchedule.mySchedule[day][shift] == 0;
+                }
+            }
+        }
     }
     
     //good practice to free memory
@@ -214,4 +311,5 @@ void roster::input_employees(){
     delete[] IDs;
     delete[] ft_IDs;
     delete[] max_hours;
+
 }

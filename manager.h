@@ -10,8 +10,11 @@ class manager : public fullTimeEmployee {
  //Third level of inheritence, inherits from fullTimeEmployee as manager is a fullTimeEmployee with added responsibilities/access
  public:
   int ID; //Numerical ID
-  manager(std::string name); //Initialiser with name
+  //manager(std::string name); //Initialiser with name
   manager(); //Initialiser without name
+  void setNamePassword(std::string name, std::string password); //sets a new name and password to the txt
+  std::string getName(); //returns name from txt 
+  std::string getPassword(); //returns name from txt
   std::string get_password(); //Returns password
 
  private:
